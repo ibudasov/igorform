@@ -28,7 +28,7 @@ test:plan:
     - cd ./environments/test
     - terraform plan -out "planfile"
   dependencies:
-    - validate
+    - test:validate
   artifacts:
     paths:
       - planfile
@@ -40,5 +40,5 @@ test:apply:
     - cd ./environments/test
     - terraform apply -input=false "planfile"
   dependencies:
-    - plan
+    - test:plan
   when: manual
