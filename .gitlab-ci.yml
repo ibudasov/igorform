@@ -3,11 +3,6 @@ stages:
   - plan
   - apply
 
-tags:
-  - docker
-  - ticketing
-  - linux
-
 image:
   name: hashicorp/terraform:light
   entrypoint:
@@ -23,12 +18,20 @@ before_script:
 
 test:validate:
   stage: validate
+  tags:
+    - docker
+    - ticketing
+    - linux
   script:
     - cd ./environments/test
     - terraform validate
 
 test:plan:
   stage: plan
+  tags:
+    - docker
+    - ticketing
+    - linux
   script:
     - cd ./environments/test
     - terraform plan -out "planfile"
@@ -41,6 +44,10 @@ test:plan:
 
 test:apply:
   stage: apply
+  tags:
+    - docker
+    - ticketing
+    - linux
   script:
     - cd ./environments/test
     - terraform apply -input=false "planfile"
