@@ -12,8 +12,6 @@ image:
 before_script:
   - rm -rf .terraform
   - terraform --version
-  - echo 'Login to Google Cloud with Service Account'
-  - gcloud auth activate-service-account --key-file="${GCLOUD_KEY_FILE}"
 
 test:validate:
   stage: validate
@@ -24,6 +22,8 @@ test:validate:
     - ticketing
     - linux
   script:
+    - echo 'Login to Google Cloud with Service Account'
+    - gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
     - cd ./environments/test
     - terraform init
     - terraform validate
@@ -37,6 +37,8 @@ test:plan:
     - ticketing
     - linux
   script:
+    - echo 'Login to Google Cloud with Service Account'
+    - gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
     - cd ./environments/test
     - terraform plan -out "planfile"
   needs:
@@ -55,6 +57,8 @@ test:apply:
     - ticketing
     - linux
   script:
+    - echo 'Login to Google Cloud with Service Account'
+    - gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
     - cd ./environments/test
     - terraform apply -input=false "planfile"
   needs:
