@@ -18,6 +18,8 @@ before_script:
 
 test:validate:
   stage: validate
+  environment:
+    name: test
   tags:
     - docker
     - ticketing
@@ -29,6 +31,8 @@ test:validate:
 
 test:plan:
   stage: plan
+  environment:
+    name: test
   tags:
     - docker
     - ticketing
@@ -45,6 +49,8 @@ test:plan:
 
 test:apply:
   stage: apply
+  environment:
+    name: test
   tags:
     - docker
     - ticketing
