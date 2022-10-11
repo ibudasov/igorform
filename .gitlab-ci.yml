@@ -3,6 +3,11 @@ stages:
   - plan
   - apply
 
+tags:
+  - docker
+  - ticketing
+  - linux
+
 image:
   name: hashicorp/terraform:light
   entrypoint:
@@ -27,7 +32,7 @@ test:plan:
   script:
     - cd ./environments/test
     - terraform plan -out "planfile"
-  dependencies:
+  needs:
     - test:validate
   artifacts:
     paths:
@@ -39,6 +44,6 @@ test:apply:
   script:
     - cd ./environments/test
     - terraform apply -input=false "planfile"
-  dependencies:
+  needs:
     - test:plan
   when: manual
