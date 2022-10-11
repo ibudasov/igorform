@@ -12,6 +12,10 @@ image:
 before_script:
   - rm -rf .terraform
   - terraform --version
+  - echo 'Install gcloud cli'
+  - curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-405.0.0-linux-x86_64.tar.gz
+  - tar -xf google-cloud-cli-405.0.0-linux-x86.tar.gz
+  - ./google-cloud-sdk/install.sh
 
 test:validate:
   stage: validate
@@ -23,7 +27,7 @@ test:validate:
     - linux
   script:
     - echo 'Login to Google Cloud with Service Account'
-    - gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
+    - ./google-cloud-sdk/bin/gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
     - cd ./environments/test
     - terraform init
     - terraform validate
@@ -38,7 +42,7 @@ test:plan:
     - linux
   script:
     - echo 'Login to Google Cloud with Service Account'
-    - gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
+    - ./google-cloud-sdk/bin/gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
     - cd ./environments/test
     - terraform plan -out "planfile"
   needs:
@@ -58,7 +62,7 @@ test:apply:
     - linux
   script:
     - echo 'Login to Google Cloud with Service Account'
-    - gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
+    - ./google-cloud-sdk/bin/gcloud auth activate-service-account --key-file="$GCLOUD_KEY_FILE"
     - cd ./environments/test
     - terraform apply -input=false "planfile"
   needs:
