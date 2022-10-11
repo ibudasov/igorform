@@ -1,6 +1,7 @@
 # Seated Ticketing Terraform
 
 ```bash
+curl https://sdk.cloud.google.com | bash # inctall GCP CLI client
 brew install terraform
 brew install terragrunt
 ```
@@ -24,14 +25,7 @@ Execute the following command. Change where needed
 ```bash
 MAKE A COPY FIRST
 terraform init -backend-config="environments/test/state-backend.tf"
-terraform plan -var-file=configuration/development/configuration.tfvars -out=tfplan.planned
-```
-
-### Production - production-01
-```bash
-MAKE A COPY FIRST
-terraform init -backend-config="bucket=production_production_remotestate_bucket"
-terraform plan -var-file=configuration/production/production/configuration.tfvars -out=tfplan.planned
+terraform plan -var-file=environments/test/config.tf -out=tfplan.planned
 ```
 
 Check plan for your changes. If agreed, perform final step.
@@ -43,4 +37,4 @@ terraform apply tfplan.planned
 ```
 
 # TODO:
-Fill in the the test environment settings.
+Fill in the test environment settings.
