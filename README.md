@@ -23,15 +23,15 @@ Execute the following command. Change where needed
 ### Development
 ```bash
 MAKE A COPY FIRST
-terraform init -backend-config="bucket=development_remotestate_bucket"
-terraform plan -var-file=configuration/development/settings.tfvars -out=tfplan.planned
+terraform init -backend-config="environments/test/state-backend.tf"
+terraform plan -var-file=configuration/development/configuration.tfvars -out=tfplan.planned
 ```
 
 ### Production - production-01
 ```bash
 MAKE A COPY FIRST
 terraform init -backend-config="bucket=production_production_remotestate_bucket"
-terraform plan -var-file=configuration/production/production/settings.tfvars -out=tfplan.planned
+terraform plan -var-file=configuration/production/production/configuration.tfvars -out=tfplan.planned
 ```
 
 Check plan for your changes. If agreed, perform final step.
