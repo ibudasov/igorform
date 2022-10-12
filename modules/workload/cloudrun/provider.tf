@@ -1,5 +1,5 @@
 provider "google" {
   credentials = "${file("creds.json")}"
-  project = "seated-test-361108"
+  project = "igorform"
   region = "europe-west4"
 }
