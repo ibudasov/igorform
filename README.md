@@ -1,14 +1,10 @@
-# Seated Ticketing Terraform
+# Igorform
 
 ```bash
 curl https://sdk.cloud.google.com | bash # inctall GCP CLI client
 brew install terraform
 brew install terragrunt
 ```
-
-## Requirements
-1. If you are already logged in, make sure you are on the correct project.
-2. Make sure that a cloud storage bucket is available that you have access to.
 
 ## Steps
 
@@ -36,5 +32,5 @@ Execute the following command
 terraform apply tfplan.planned
 ```
 
-# TODO:
-Fill in the test environment settings.
+# Etc
+- service account shall have those roles: Cloud Run Admin, Cloud Run Service Agent, Service Usage Admin
